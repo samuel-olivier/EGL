@@ -17,7 +17,10 @@ namespace EGL
 		virtual ~SFMLContext();
 
 		virtual bool	initialize(unsigned int windowWidth, unsigned int windowHeight, std::string const& windowName);
+		virtual void	updateInputs(InputManager& inputs);
 		virtual void	display();
+
+		virtual bool	windowIsOpen() const;
 
 	private:
 		sf::Window	*_window;
