@@ -73,7 +73,6 @@ glm::mat4 const&	Node::worldSpaceMatrix()
 		this->_worldSpaceMatrix = glm::rotate(this->_worldSpaceMatrix, this->_rotation.y, glm::vec3(0.f, 1.f, 0.f));
 		this->_worldSpaceMatrix = glm::rotate(this->_worldSpaceMatrix, this->_rotation.z, glm::vec3(0.f, 0.f, 1.f));
 		this->_worldSpaceMatrix = glm::scale(this->_worldSpaceMatrix, this->_scaling);
-		printf("%f %f %f\n", this->_scaling.x, this->_scaling.y, this->_scaling.z);
 		this->_needUpdate = false;
 	}
 	return this->_worldSpaceMatrix;

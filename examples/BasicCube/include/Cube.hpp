@@ -19,7 +19,7 @@ public:
 	virtual void	draw(EGL::ShaderProgram& program, glm::mat4 const& view, glm::mat4 const& projection);
 
 private:
-	EGL::Mesh	*_mesh;
+	static EGL::Mesh	*_mesh;
 };
 
 #endif

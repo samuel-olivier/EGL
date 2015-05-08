@@ -8,7 +8,7 @@ namespace EGL
 	public:
 		virtual ~Game() {}
 
-		virtual void	initialize() = 0;
+		virtual bool	initialize() = 0;
 		virtual void	update() = 0;
 		virtual void	draw() = 0;
 	};
