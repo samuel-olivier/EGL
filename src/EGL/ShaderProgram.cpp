@@ -133,6 +133,34 @@ namespace EGL
 		return this->_shaders;
 	}
 
+	void	ShaderProgram::enableAttributeArray(int location)
+	{
+		glEnableVertexAttribArray(location);
+	}
+
+	void	ShaderProgram::disableAttributeArray(int location)
+	{
+		glDisableVertexAttribArray(location);
+	}
+
+	void	ShaderProgram::enableAttributeArray(std::string const& name)
+	{
+		int	location = this->attributeLocation(name);
+
+		if (location >= 0) {
+			this->enableAttributeArray(location);
+		}
+	}
+
+	void	ShaderProgram::disableAttributeArray(std::string const& name)
+	{
+		int	location = this->attributeLocation(name);
+
+		if (location >= 0) {
+			this->disableAttributeArray(location);
+		}
+	}
+
 	void	ShaderProgram::setAttributeBuffer(int location, GLenum type, int offset, int tupleSize, int stride)
 	{
 		if (!this->isCreated() || !this->isLinked()) {

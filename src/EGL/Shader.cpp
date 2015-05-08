@@ -31,9 +31,9 @@ namespace EGL
 		if (glGetError() != GL_NO_ERROR) {
 			return false;
 		}
-		GLint result = GL_FALSE;
+		GLint result;
 		glGetShaderiv(this->_shaderId, GL_COMPILE_STATUS, &result);
-		if (result == GL_FALSE || glGetError() != GL_NO_ERROR) {
+		if (glGetError() != GL_NO_ERROR) {
 			return false;
 		}
 		this->_isCompiled = true;

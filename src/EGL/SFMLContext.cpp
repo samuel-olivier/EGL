@@ -1,6 +1,7 @@
 #include "EGL/SFMLContext.hpp"
 
 #include <SFML/Window.hpp>
+#include <GL/glew.h>
 
 namespace EGL
 {
@@ -25,8 +26,16 @@ namespace EGL
 		settings.majorVersion = 3;
 		settings.minorVersion = 0;
 		this->_window = new sf::Window(sf::VideoMode(windowWidth, windowHeight), windowName, sf::Style::Default, settings);
+		settings = this->_window->getSettings();
 		this->_window->setVerticalSyncEnabled(true);
 		this->_window->setFramerateLimit(60);
+		GLenum err = glewInit();
+		if (err != GLEW_OK) {
+			return false;
+		}
+		GLuint VertexArrayID;
+		glGenVertexArrays(1, &VertexArrayID);
+		glBindVertexArray(VertexArrayID);
 		return this->_window->isOpen();
 	}
 	

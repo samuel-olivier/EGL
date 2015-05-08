@@ -17,7 +17,7 @@ namespace EGL
 		~Mesh();
 
 		bool	build();
-		void	pushVertex(glm::vec3 const& position, glm::vec3 const& normal, glm::vec2 const& texCoord, glm::vec4 const& color);
+		void	pushVertex(glm::vec3 const& position, glm::vec3 const& normal = glm::vec3(), glm::vec2 const& texCoord = glm::vec2(), glm::vec4 const& color = glm::vec4());
 		void	pushFace(int vertexIdx1, int vertexIdx2, int vertexIdx3);
 
 		void	setVertexPosition(int idx, glm::vec3 const& position);
@@ -43,7 +43,7 @@ namespace EGL
 		std::vector<glm::vec3>	_vertexNormals;
 		std::vector<glm::vec2>	_vertexTexCoords;
 		std::vector<glm::vec4>	_vertexColors;
-		std::vector<int>		_faces;
+		std::vector<unsigned int>		_faces;
 	};
 }
 

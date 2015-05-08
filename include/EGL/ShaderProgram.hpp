@@ -30,6 +30,11 @@ namespace EGL
 		GLuint	programId() const;
 		std::list<Shader*>	shaders() const;
 
+		void	enableAttributeArray(int location);
+		void	disableAttributeArray(int location);
+		void	enableAttributeArray(std::string const& name);
+		void	disableAttributeArray(std::string const& name);
+
 		void	setAttributeBuffer(int location, GLenum type, int offset, int tupleSize, int stride = 0);
 		void	setAttributeBuffer(std::string const& name, GLenum type, int offset, int tupleSize, int stride = 0);
 
