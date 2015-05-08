@@ -15,7 +15,7 @@ public:
 	~Cube();
 
 	virtual bool	initialize();
-	virtual void	update(EGL::InputManager& inputs);
+	virtual void	update(EGL::InputManager& inputs, EGL::Clock const& clock);
 	virtual void	draw(EGL::ShaderProgram& program, glm::mat4 const& view, glm::mat4 const& projection);
 
 private:

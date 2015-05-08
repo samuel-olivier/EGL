@@ -1,5 +1,5 @@
-#ifndef __MESH__
-#define __MESH__
+#ifndef __EGL_MESH__
+#define __EGL_MESH__
 
 #include <glm/glm.hpp>
 #include <vector>
@@ -19,6 +19,7 @@ namespace EGL
 		bool	build();
 		void	pushVertex(glm::vec3 const& position, glm::vec3 const& normal = glm::vec3(), glm::vec2 const& texCoord = glm::vec2(), glm::vec4 const& color = glm::vec4());
 		void	pushFace(int vertexIdx1, int vertexIdx2, int vertexIdx3);
+		void	draw(ShaderProgram& program, glm::mat4 const& model, glm::mat4 const& view, glm::mat4 const& projection);
 
 		void	setVertexPosition(int idx, glm::vec3 const& position);
 		void	setVertexNormal(int idx, glm::vec3 const& normal);
@@ -34,7 +35,7 @@ namespace EGL
 		glm::vec2 const&	vertexTexCoord(int idx) const;
 		glm::vec4 const&	vertexColor(int idx) const;
 
-		void	draw(ShaderProgram& program, glm::mat4 const& model, glm::mat4 const& view, glm::mat4 const& projection, GLenum drawMode = GL_TRIANGLES);
+		void	generateNormals();
 
 	private:
 		Buffer					*_vertexBuffer;

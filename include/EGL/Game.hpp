@@ -1,5 +1,5 @@
-#ifndef __GAME__
-#define __GAME__
+#ifndef __EGL_GAME__
+#define __EGL_GAME__
 
 namespace EGL
 {

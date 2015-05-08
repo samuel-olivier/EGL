@@ -1,5 +1,5 @@
-#ifndef __RENDER_CONTEXT__
-#define __RENDER_CONTEXT__
+#ifndef __EGL_RENDER_CONTEXT__
+#define __EGL_RENDER_CONTEXT__
 
 #include <string>
 

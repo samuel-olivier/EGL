@@ -33,6 +33,7 @@ int	main()
 	EGL::RenderContext	*context = new EGL::SFMLContext();
 	EGL::InputManager	inputs;
 	EGL::ShaderProgram	*program;
+	EGL::Clock			clock;
 
 	//Creating OpenGL Context & Window
 	context->initialize(WINDOW_WIDTH, WINDOW_HEIGHT, "Window");
@@ -48,11 +49,16 @@ int	main()
 	Node	*cube = new Cube();
 	cube->initialize();
 
+	glEnable(GL_DEPTH_TEST);
+
 	// Game Loop
 	while (context->windowIsOpen()) {
-		// Update
+		// Update Input & Clock
 		context->updateInputs(inputs);
-		cube->update(inputs);
+		clock.update();
+
+		// Update scene
+		cube->update(inputs, clock);
 
 		// Draw
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

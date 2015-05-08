@@ -1,5 +1,5 @@
-#ifndef __INPUT_MANAGER__
-#define __INPUT_MANAGER__
+#ifndef __EGL_INPUT_MANAGER__
+#define __EGL_INPUT_MANAGER__
 
 #include <glm/glm.hpp>
 #include <unordered_set>

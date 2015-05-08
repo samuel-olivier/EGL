@@ -63,7 +63,7 @@ namespace EGL
 		this->_faces.push_back(vertexIdx3);
 	}
 
-	void	Mesh::draw(ShaderProgram& program, glm::mat4 const& model, glm::mat4 const& view, glm::mat4 const& projection, GLenum drawMode)
+	void	Mesh::draw(ShaderProgram& program, glm::mat4 const& model, glm::mat4 const& view, glm::mat4 const& projection)
 	{
 		if (!this->_vertexBuffer->isCreated() || !this->_indexBuffer->isCreated()) {
 			return ;
@@ -72,29 +72,29 @@ namespace EGL
 			return ;
 		}
 		program.use();
-		program.enableAttributeArray("position");
-		program.enableAttributeArray("normal");
-		program.enableAttributeArray("texCoord");
-		program.enableAttributeArray("color");
+		program.enableAttributeArray("vertexPosition_modelspace");
+		program.enableAttributeArray("vertexNormal_modelspace");
+		program.enableAttributeArray("vertexUV");
+		program.enableAttributeArray("vertexColor");
 
-		program.setAttributeBuffer("position", GL_FLOAT, 0, 3, 12 * sizeof(float));
-		program.setAttributeBuffer("normal", GL_FLOAT, 3 * sizeof(float), 3, 12 * sizeof(float));
-		program.setAttributeBuffer("texCoord", GL_FLOAT, 6 * sizeof(float), 2, 12 * sizeof(float));
-		program.setAttributeBuffer("color", GL_FLOAT, 8 * sizeof(float), 4, 12 * sizeof(float));
-		program.setUniformValue("mvp", projection * view * model);
-		program.setUniformValue("m", model);
-		program.setUniformValue("v", view);
-		program.setUniformValue("p", projection);
+		program.setAttributeBuffer("vertexPosition_modelspace", GL_FLOAT, 0, 3, 12 * sizeof(float));
+		program.setAttributeBuffer("vertexNormal_modelspace", GL_FLOAT, 3 * sizeof(float), 3, 12 * sizeof(float));
+		program.setAttributeBuffer("vertexUV", GL_FLOAT, 6 * sizeof(float), 2, 12 * sizeof(float));
+		program.setAttributeBuffer("vertexColor", GL_FLOAT, 8 * sizeof(float), 4, 12 * sizeof(float));
+		program.setUniformValue("MVP", projection * view * model);
+		program.setUniformValue("M", model);
+		program.setUniformValue("V", view);
+		program.setUniformValue("LightPosition_worldspace", glm::vec3(2.0, 3.0, 3.0));
 
 		if (!this->_indexBuffer->bind()) {
 			return ;
 		}
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glDrawElements(drawMode, this->_faces.size(), GL_UNSIGNED_INT, (GLvoid*)0);
-		program.disableAttributeArray("position");
-		program.disableAttributeArray("normal");
-		program.disableAttributeArray("texCoord");
-		program.disableAttributeArray("color");
+		glDrawElements(GL_TRIANGLES, this->_faces.size(), GL_UNSIGNED_INT, (GLvoid*)0);
+		program.disableAttributeArray("vertexPosition_modelspace");
+		program.disableAttributeArray("vertexNormal_modelspace");
+		program.disableAttributeArray("vertexUV");
+		program.disableAttributeArray("vertexColor");
 	}
 
 	void	Mesh::setVertexPosition(int idx, glm::vec3 const& position)
@@ -156,4 +156,25 @@ namespace EGL
 	{
 		return this->_vertexColors[idx];
 	}
+
+	void	Mesh::generateNormals()
+	{
+		for (glm::vec3& normal : this->_vertexNormals) {
+			normal = glm::vec3(0.f);
+		}
+		for (unsigned int i = 0; i < this->_faces.size() / 3; ++i) {
+			int	a = this->_faces[i * 3 + 0],
+				b = this->_faces[i * 3 + 1],
+				c = this->_faces[i * 3 + 2];
+
+			glm::vec3 n = glm::cross(this->_vertexPositions[b] - this->_vertexPositions[a], this->_vertexPositions[c] - this->_vertexPositions[a]);
+			this->_vertexNormals[a] += n;
+			this->_vertexNormals[b] += n;
+			this->_vertexNormals[c] += n;
+		}
+		for (glm::vec3& normal : this->_vertexNormals) {
+			normal = glm::normalize(normal);
+		}
+	}
+
 }

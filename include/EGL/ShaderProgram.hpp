@@ -1,5 +1,5 @@
-#ifndef __SHADER_PROGRAM__
-#define __SHADER_PROGRAM__
+#ifndef __EGL_SHADER_PROGRAM__
+#define __EGL_SHADER_PROGRAM__
 
 #include <GL/glew.h>
 #include <unordered_map>

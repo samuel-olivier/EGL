@@ -53,7 +53,9 @@ void	Node::setScaling(glm::vec3 const& scaling)
 
 void	Node::scale(glm::vec3 const& scaling)
 {
-	this->_scaling *= scaling;
+	this->_scaling.x *= scaling.x;
+	this->_scaling.y *= scaling.y;
+	this->_scaling.z *= scaling.z;
 	this->_needUpdate = true;
 }
 
@@ -66,11 +68,12 @@ glm::mat4 const&	Node::worldSpaceMatrix()
 {
 	if (this->_needUpdate) {
 		this->_worldSpaceMatrix = glm::mat4(1.f);
+		this->_worldSpaceMatrix = glm::translate(this->_worldSpaceMatrix, this->_position);
 		this->_worldSpaceMatrix = glm::rotate(this->_worldSpaceMatrix, this->_rotation.x, glm::vec3(1.f, 0.f, 0.f));
 		this->_worldSpaceMatrix = glm::rotate(this->_worldSpaceMatrix, this->_rotation.y, glm::vec3(0.f, 1.f, 0.f));
 		this->_worldSpaceMatrix = glm::rotate(this->_worldSpaceMatrix, this->_rotation.z, glm::vec3(0.f, 0.f, 1.f));
-		this->_worldSpaceMatrix = glm::translate(this->_worldSpaceMatrix, this->_position);
 		this->_worldSpaceMatrix = glm::scale(this->_worldSpaceMatrix, this->_scaling);
+		printf("%f %f %f\n", this->_scaling.x, this->_scaling.y, this->_scaling.z);
 		this->_needUpdate = false;
 	}
 	return this->_worldSpaceMatrix;

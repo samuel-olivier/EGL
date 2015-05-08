@@ -1,5 +1,5 @@
-#ifndef __BUFFER__
-#define __BUFFER__
+#ifndef __EGL_BUFFER__
+#define __EGL_BUFFER__
 
 #include <GL/glew.h>
 

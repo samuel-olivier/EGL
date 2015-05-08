@@ -1,5 +1,5 @@
-#ifndef __SFML_CONTEXT__
-#define __SFML_CONTEXT__
+#ifndef __EGL_SFML_CONTEXT__
+#define __EGL_SFML_CONTEXT__
 
 #include "EGL/RenderContext.hpp"
 
