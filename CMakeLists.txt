@@ -19,6 +19,7 @@ find_package(SFML 2 REQUIRED system window graphics)
 
 # Set the compiler flags to support c++0x
 set(CMAKE_CXX_FLAGS "-std=c++0x -Wall -Wextra" CACHE STRING "Compiler flags" FORCE)
+add_definitions(-DGLM_FORCE_RADIANS)
 
 # Includes paths
 include_directories(

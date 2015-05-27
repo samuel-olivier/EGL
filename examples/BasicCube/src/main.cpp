@@ -1,11 +1,17 @@
 #include <iostream>
 #include <fstream>
 #include <SFML/Window.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
-#include "EGL/SFMLContext.hpp"
-#include "EGL/ShaderProgram.hpp"
-#include "EGL/Shader.hpp"
-#include "EGL/Mesh.hpp"
+#include <EGL/SFMLContext.hpp>
+#include <EGL/ShaderProgram.hpp>
+#include <EGL/Shader.hpp>
+
+#include "../include/Cube.hpp"
+
+#define WINDOW_WIDTH 800.f
+#define WINDOW_HEIGHT 600.f
 
 EGL::ShaderProgram	*basicShaderProgram()
 {
@@ -28,20 +34,29 @@ int	main()
 	EGL::InputManager	inputs;
 	EGL::ShaderProgram	*program;
 
-	context->initialize(800, 600, "Window");
+	//Creating OpenGL Context & Window
+	context->initialize(WINDOW_WIDTH, WINDOW_HEIGHT, "Window");
 	std::cout << "Using OpenGL version " << glGetString(GL_VERSION) << std::endl;
-	program = basicShaderProgram();
-	EGL::Mesh	*cube = new EGL::Mesh;
-	cube->pushVertex(glm::vec3(-1.f, -1.f, 0.f), glm::vec3(), glm::vec2(), glm::vec4(1.f, 0.f, 0.f, 1.f));
-	cube->pushVertex(glm::vec3(0.f, 1.f, 0.f), glm::vec3(), glm::vec2(), glm::vec4(0.f, 1.f, 0.f, 1.f));
-	cube->pushVertex(glm::vec3(1.f, -1.f, 0.f), glm::vec3(), glm::vec2(), glm::vec4(0.f, 0.f, 1.f, 1.f));
-	cube->pushFace(0, 1, 2);
-	std::cout << "Building cube : " << cube->build() << std::endl;
-	while (context->windowIsOpen()) {
-		context->updateInputs(inputs);
 
+	//Create the shader prograg
+	program = basicShaderProgram();
+
+	// Setting Up Camera
+	glm::mat4			v = glm::lookAt(glm::vec3(0.f, 1.f, 3.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 1.f, 0.f));
+	glm::mat4			p = glm::perspective(glm::radians(45.0f), WINDOW_WIDTH / WINDOW_HEIGHT, 0.1f, 100.0f);
+
+	Node	*cube = new Cube();
+	cube->initialize();
+
+	// Game Loop
+	while (context->windowIsOpen()) {
+		// Update
+		context->updateInputs(inputs);
+		cube->update(inputs);
+
+		// Draw
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		cube->draw(*program, glm::mat4(1.f), glm::mat4(1.f), glm::mat4(1.f));
+		cube->draw(*program, v, p);
 		context->display();
 	}
 	return 0;

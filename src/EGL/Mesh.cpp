@@ -63,7 +63,7 @@ namespace EGL
 		this->_faces.push_back(vertexIdx3);
 	}
 
-	void	Mesh::draw(ShaderProgram& program, glm::mat4 const& model, glm::mat4 const& view, glm::mat4 const& projection)
+	void	Mesh::draw(ShaderProgram& program, glm::mat4 const& model, glm::mat4 const& view, glm::mat4 const& projection, GLenum drawMode)
 	{
 		if (!this->_vertexBuffer->isCreated() || !this->_indexBuffer->isCreated()) {
 			return ;
@@ -76,24 +76,21 @@ namespace EGL
 		program.enableAttributeArray("normal");
 		program.enableAttributeArray("texCoord");
 		program.enableAttributeArray("color");
-		// program.setAttributeBuffer("position", GL_FLOAT, 0, 3, 12 * sizeof(float));
-		// // Draw the triangle !
-		// glDrawArrays(GL_TRIANGLES, 0, 3); // Starting from vertex 0; 3 vertices total -> 1 triangle
-		 
 
 		program.setAttributeBuffer("position", GL_FLOAT, 0, 3, 12 * sizeof(float));
 		program.setAttributeBuffer("normal", GL_FLOAT, 3 * sizeof(float), 3, 12 * sizeof(float));
 		program.setAttributeBuffer("texCoord", GL_FLOAT, 6 * sizeof(float), 2, 12 * sizeof(float));
 		program.setAttributeBuffer("color", GL_FLOAT, 8 * sizeof(float), 4, 12 * sizeof(float));
-		// program.setUniformValue("mvp", projection * view * model);
-		// program.setUniformValue("m", model);
-		// program.setUniformValue("v", view);
-		// program.setUniformValue("p", projection);
+		program.setUniformValue("mvp", projection * view * model);
+		program.setUniformValue("m", model);
+		program.setUniformValue("v", view);
+		program.setUniformValue("p", projection);
+
 		if (!this->_indexBuffer->bind()) {
 			return ;
 		}
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glDrawElements(GL_TRIANGLES, this->_faces.size(), GL_UNSIGNED_INT, (GLvoid*)0);
+		glDrawElements(drawMode, this->_faces.size(), GL_UNSIGNED_INT, (GLvoid*)0);
 		program.disableAttributeArray("position");
 		program.disableAttributeArray("normal");
 		program.disableAttributeArray("texCoord");

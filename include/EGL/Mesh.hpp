@@ -34,7 +34,7 @@ namespace EGL
 		glm::vec2 const&	vertexTexCoord(int idx) const;
 		glm::vec4 const&	vertexColor(int idx) const;
 
-		void	draw(ShaderProgram& program, glm::mat4 const& model, glm::mat4 const& view, glm::mat4 const& projection);
+		void	draw(ShaderProgram& program, glm::mat4 const& model, glm::mat4 const& view, glm::mat4 const& projection, GLenum drawMode = GL_TRIANGLES);
 
 	private:
 		Buffer					*_vertexBuffer;
