@@ -16,6 +16,8 @@ find_package(GLEW REQUIRED)
 # Find SFML
 find_package(SFML 2 REQUIRED system window graphics)
 
+# Find FBX
+find_package(FBX)
 
 # Set the compiler flags to support c++0x
 set(CMAKE_CXX_FLAGS "-std=c++0x -Wall -Wextra" CACHE STRING "Compiler flags" FORCE)
@@ -26,6 +28,7 @@ include_directories(
     include
     ${SFML_INCLUDE_DIR}
     ${GLEW_INCLUDE_DIR}
+    ${FBX_INCLUDE_DIR}
 )
 
 link_directories(
@@ -45,6 +48,7 @@ target_link_libraries(
 	${SFML_LIBRARIES}
 	${OPENGL_LIBRARIES}
 	${GLEW_LIBRARIES}
+    ${FBX_LIBRARY}
 )
 
 file(GLOB EXAMPLES ${PROJECT_SOURCE_DIR}/examples/*)

@@ -84,7 +84,7 @@ namespace EGL
 		program.setUniformValue("MVP", projection * view * model);
 		program.setUniformValue("M", model);
 		program.setUniformValue("V", view);
-		program.setUniformValue("LightPosition_worldspace", glm::vec3(2.0, 3.0, 3.0));
+		program.setUniformValue("LightPosition_worldspace", glm::vec3(0.0, 6.0, 0.0));
 
 		if (!this->_indexBuffer->bind()) {
 			return ;
