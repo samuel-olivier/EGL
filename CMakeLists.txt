@@ -17,7 +17,7 @@ find_package(GLEW REQUIRED)
 find_package(SFML 2 REQUIRED system window graphics)
 
 # Find FBX
-find_package(FBX)
+find_package(FBX REQUIRED)
 
 # Set the compiler flags to support c++0x
 set(CMAKE_CXX_FLAGS "-std=c++0x -Wall -Wextra" CACHE STRING "Compiler flags" FORCE)
