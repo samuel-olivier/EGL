@@ -246,13 +246,13 @@ namespace EGL
 		glUniform1iv(location, 1, &value);
 	}
 
-	void	ShaderProgram::setUniformValue(int location, GLuint value)
-	{
-		if (!this->isCreated() || !this->isLinked()) {
-			return ;
-		}
-		glUniform1uiv(location, 1, &value);
-	}
+	// void	ShaderProgram::setUniformValue(int location, GLuint value)
+	// {
+	// 	if (!this->isCreated() || !this->isLinked()) {
+	// 		return ;
+	// 	}
+	// 	glUniform1uiv(location, 1, &value);
+	// }
 
 	void	ShaderProgram::setUniformValue(int location, glm::vec2 const& value)
 	{
@@ -312,10 +312,10 @@ namespace EGL
 		this->_setUniformValueFromString(name, value);
 	}
 
-	void	ShaderProgram::setUniformValue(std::string const& name, GLuint value)
-	{
-		this->_setUniformValueFromString(name, value);
-	}
+	// void	ShaderProgram::setUniformValue(std::string const& name, GLuint value)
+	// {
+	// 	this->_setUniformValueFromString(name, value);
+	// }
 
 	void	ShaderProgram::setUniformValue(std::string const& name, glm::vec2 const& value)
 	{

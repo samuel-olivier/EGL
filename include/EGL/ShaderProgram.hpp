@@ -49,7 +49,7 @@ namespace EGL
 
 		void	setUniformValue(int location, GLfloat value);
 		void	setUniformValue(int location, GLint value);
-		void	setUniformValue(int location, GLuint value);
+		// void	setUniformValue(int location, GLuint value);
 		void	setUniformValue(int location, glm::vec2 const& value);
 		void	setUniformValue(int location, glm::vec3 const& value);
 		void	setUniformValue(int location, glm::vec4 const& value);
@@ -58,7 +58,7 @@ namespace EGL
 		void	setUniformValue(int location, glm::mat4 const& value);
 		void	setUniformValue(std::string const& name, GLfloat value);
 		void	setUniformValue(std::string const& name, GLint value);
-		void	setUniformValue(std::string const& name, GLuint value);
+		// void	setUniformValue(std::string const& name, GLuint value);
 		void	setUniformValue(std::string const& name, glm::vec2 const& value);
 		void	setUniformValue(std::string const& name, glm::vec3 const& value);
 		void	setUniformValue(std::string const& name, glm::vec4 const& value);

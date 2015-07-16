@@ -33,9 +33,9 @@ namespace EGL
 		if (err != GLEW_OK) {
 			return false;
 		}
-		GLuint VertexArrayID;
-		glGenVertexArrays(1, &VertexArrayID);
-		glBindVertexArray(VertexArrayID);
+		// GLuint VertexArrayID;
+		// glGenVertexArrays(1, &VertexArrayID);
+		// glBindVertexArray(VertexArrayID);
 		return this->_window->isOpen();
 	}
 	
