@@ -1,6 +1,7 @@
 #include "EGL/Mesh.hpp"
 
 #include "EGL/Buffer.hpp"
+#include "EGL/Texture.hpp"
 
 namespace EGL
 {
@@ -85,6 +86,9 @@ namespace EGL
 		program.setUniformValue("M", model);
 		program.setUniformValue("V", view);
 		program.setUniformValue("LightPosition_worldspace", glm::vec3(0.0, 6.0, 0.0));
+		glActiveTexture(GL_TEXTURE0);
+		program.setUniformValue("DiffuseTexture", 0);
+		// printf("Error %s\n", gluErrorString(glGetError()));
 
 		if (!this->_indexBuffer->bind()) {
 			return ;

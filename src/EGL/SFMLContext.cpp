@@ -33,6 +33,7 @@ namespace EGL
 		if (err != GLEW_OK) {
 			return false;
 		}
+		glEnable(GL_TEXTURE_2D);
 		// GLuint VertexArrayID;
 		// glGenVertexArrays(1, &VertexArrayID);
 		// glBindVertexArray(VertexArrayID);

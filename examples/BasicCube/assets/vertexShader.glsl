@@ -17,7 +17,7 @@ uniform mat4 M;
 uniform mat4 V;
 uniform vec3 LightPosition_worldspace;
 
-void main(){
+void main() {
 	gl_Position =  MVP * vec4(vertexPosition_modelspace, 1.0);
 
 	Position_worldspace = (M * vec4(vertexPosition_modelspace, 1.0)).xyz;

@@ -39,10 +39,13 @@ bool	Game::initialize()
 
 	int width = 30;
 	int height = 30;
+	EGL::Texture	texture;
+	texture.load("../examples/BasicCube/assets/sample.bmp");
 	for (int y = 0; y < height; ++y) {
 		for (int x = 0; x < width; ++x) {
-			Node	*cube = new Cube;
-			cube->initialize();
+			Cube	*cube = new Cube;
+			cube->initialize(glm::vec4(1.f, 0.f, 0.f, 1.f));
+			cube->setTexture(texture);
 			cube->translate(glm::vec3((x - float(width) / 2.f) * 2.f, 0.f, (y - float(height) / 2.f) * 2.f));
 			this->_scene.addNode(cube);
 		}
