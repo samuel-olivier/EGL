@@ -7,14 +7,14 @@ varying vec3 Normal_cameraspace;
 varying vec3 EyeDirection_cameraspace;
 varying vec3 LightDirection_cameraspace;
 
-uniform mat4 MV;
 uniform vec3 LightPosition_worldspace;
+uniform sampler2D DiffuseTexture;
 
-void main(){
+void main() {
 	vec3	LightColor = vec3(1.0, 1.0, 1.0);
-	float	LightPower = 40.0f;
+	float	LightPower = 100.0f;
 	
-	vec3	MaterialDiffuseColor = color.xyz;
+	vec3	MaterialDiffuseColor = color.xyz + texture2D(DiffuseTexture, UV).rgb;
 	vec3	MaterialAmbientColor = vec3(0.1, 0.1, 0.1) * MaterialDiffuseColor;
 	vec3	MaterialSpecularColor = vec3(0.3, 0.3, 0.3);
 

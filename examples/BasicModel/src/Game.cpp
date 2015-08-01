@@ -28,8 +28,8 @@ bool	Game::initialize()
 	EGL::Shader			*vertexShader = new EGL::Shader(GL_VERTEX_SHADER);
 	EGL::Shader			*fragmentShader = new EGL::Shader(GL_FRAGMENT_SHADER);
 	std::cout << "Creating shader program : " << this->_shaderProgram.create() << std::endl;
-	std::cout << "Compile vertex shader : " << vertexShader->compileSourceFile("../examples/BasicModel/assets/vertexShader.glsl") << std::endl;
-	std::cout << "Compile fragment shader : " << fragmentShader->compileSourceFile("../examples/BasicModel/assets/fragmentShader.glsl") << std::endl;
+	std::cout << "Compile vertex shader : " << vertexShader->compileSourceFile("../examples/assets/vertexShader.glsl") << std::endl;
+	std::cout << "Compile fragment shader : " << fragmentShader->compileSourceFile("../examples/assets/fragmentShader.glsl") << std::endl;
 	std::cout << "Adding vertex shader : " << this->_shaderProgram.addShader(vertexShader) << std::endl;
 	std::cout << "Adding fragment shader : " << this->_shaderProgram.addShader(fragmentShader) << std::endl;
 	std::cout << "Linking shader program : " << this->_shaderProgram.link() << std::endl;
@@ -39,7 +39,7 @@ bool	Game::initialize()
 
 	Model	*marvin = new Model();
 	marvin->initialize();
-	std::cout << "Loading Marvin : " << marvin->load("../examples/BasicModel/assets/marvin.fbx") << std::endl;
+	std::cout << "Loading Marvin : " << marvin->load("../examples/assets/marvin.fbx") << std::endl;
 	marvin->scale(glm::vec3(0.08f));
 	this->_scene.addNode(marvin);
 	return true;

@@ -28,8 +28,8 @@ bool	Game::initialize()
 	EGL::Shader			*vertexShader = new EGL::Shader(GL_VERTEX_SHADER);
 	EGL::Shader			*fragmentShader = new EGL::Shader(GL_FRAGMENT_SHADER);
 	std::cout << "Creating shader program : " << this->_shaderProgram.create() << std::endl;
-	std::cout << "Compile vertex shader : " << vertexShader->compileSourceFile("../examples/BasicCube/assets/vertexShader.glsl") << std::endl;
-	std::cout << "Compile fragment shader : " << fragmentShader->compileSourceFile("../examples/BasicCube/assets/fragmentShader.glsl") << std::endl;
+	std::cout << "Compile vertex shader : " << vertexShader->compileSourceFile("../examples/assets/vertexShader.glsl") << std::endl;
+	std::cout << "Compile fragment shader : " << fragmentShader->compileSourceFile("../examples/assets/fragmentShader.glsl") << std::endl;
 	std::cout << "Adding vertex shader : " << this->_shaderProgram.addShader(vertexShader) << std::endl;
 	std::cout << "Adding fragment shader : " << this->_shaderProgram.addShader(fragmentShader) << std::endl;
 	std::cout << "Linking shader program : " << this->_shaderProgram.link() << std::endl;
@@ -40,12 +40,16 @@ bool	Game::initialize()
 	int width = 30;
 	int height = 30;
 	EGL::Texture	texture;
-	texture.load("../examples/BasicCube/assets/sample.bmp");
+	texture.load("../examples/assets/sample.jpg");
 	for (int y = 0; y < height; ++y) {
 		for (int x = 0; x < width; ++x) {
 			Cube	*cube = new Cube;
-			cube->initialize(glm::vec4(1.f, 0.f, 0.f, 1.f));
-			cube->setTexture(texture);
+			if ((y * width + x) % 2 == 0) {
+				cube->initialize(glm::vec4(0.f, 0.f, 0.f, 1.f));
+				cube->setTexture(texture);
+			} else {
+				cube->initialize(glm::vec4(1.f, 0.f, 0.f, 1.f));
+			}
 			cube->translate(glm::vec3((x - float(width) / 2.f) * 2.f, 0.f, (y - float(height) / 2.f) * 2.f));
 			this->_scene.addNode(cube);
 		}
